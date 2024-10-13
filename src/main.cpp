@@ -1,8 +1,11 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
-#include "UI/button/button.h" // Include your Button class
+#include "UI/buttons/base_button/base_button.h" // Include your Button class
+#include "UI/buttons/checkbox/checkbox.h" // Include your Button class
 
 Button myButton(100, 100, 200, 50, "Click Me"); // Button instance
+CheckBox mycheckBox(200, 200, 25, 25, "Accept Terms");
+
 double xpos, ypos; // Mouse position variables
 
 void cursor_position_callback(GLFWwindow* window, double x, double y) {
@@ -15,8 +18,17 @@ void cursor_position_callback(GLFWwindow* window, double x, double y) {
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        // Call updateMouseState with the current mouse position
-        myButton.updateMouseState(xpos, ypos, button, action);
+        double xpos, ypos;
+        glfwGetCursorPos(window, &xpos, &ypos); // Get mouse position
+
+        if (myButton.isClicked(xpos, ypos)) { // Check if the button was clicked
+            myButton.updateMouseState(xpos, ypos, button, action);
+        }
+
+        if (mycheckBox.isClicked(xpos, ypos) && action == GLFW_PRESS) { // Check if the checkbox was clicked
+            mycheckBox.onMouseClick(xpos, ypos);
+
+        }
     }
 }
 
@@ -60,6 +72,7 @@ int main() {
 
         // Draw the button
         myButton.draw();
+        mycheckBox.draw();
 
         // Swap front and back buffers
         glfwSwapBuffers(window);
