@@ -1,0 +1,35 @@
+# CMake generated files
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/Makefile
+
+# Build directories
+/build/
+/bin/
+*.o
+*.so
+*.a
+*.dSYM
+
+# Compiled object files
+*.o
+
+# Executables
+*.exe
+*.out
+
+# Backup files
+*~
+*.bak
+*.swp
+*.tmp
+
+# Visual Studio Code settings
+.vscode/
+
+# macOS specific
+.DS_Store
+
+# Logs
+*.log
